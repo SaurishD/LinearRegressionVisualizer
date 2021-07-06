@@ -9,18 +9,17 @@
 </div>
 <div style="position: absolute; width: 18%; height: 80%; border: none; border-width: 1px;right: 0.5%;">
   <p>Hypothesis function used for Linear regression is 'Y = t1*X + t0'. Objective of the the algorithm is to find the best values for t0 & t1 </p>
-  <form action="">
+  
     <label>No. Of iterations:</label>
-    <input type="number" [value]="iterations"/>
+    <input type="number" [(ngModel)]="iterations"/>
     <label>t0 Initial value:</label>
-    <input type="number" [value]="t0"/>
+    <input type="number" [(ngModel)]="t0"/>
     <label>t1 Initial value:</label>
-    <input type="number" [value]="t1"/>
+    <input type="number" [(ngModel)]="t1"/>
     <label>Learning Rate:</label>
-    <input type="number" [value]="learningRate"/>
+    <input type="number" [(ngModel)]="learningRate"/>
     <label>Delay (in ms):</label>
-    <input type="number" [value]="delay"/>
-  </form>
+    <input type="number" [(ngModel)]="delay"/>
   <button class="button" (click)="GradientDescent()">Calculate</button>
 
 </div>

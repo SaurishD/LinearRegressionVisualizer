@@ -84,7 +84,16 @@ export class AppComponent {
 
   async doReset(){
     this.reset = true;
-
+    this.x.length = 0;
+    this.y.length = 0;
+    this.dots.length = 0;
+    this.cost =0;
+    this.t1=0;
+    this.t0 =0;
+    this.line[0] = 0;
+    this.line[1] = 0;
+    this.line[2] = 2000;
+    this.line[3] = 0;
     await new Promise(f => setTimeout(f,2*this.delay));
     this.reset = false;
   }

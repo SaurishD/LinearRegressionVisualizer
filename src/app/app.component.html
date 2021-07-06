@@ -7,7 +7,28 @@
       <circle [attr.cx]='dot[0]' [attr.cy]='dot[1]' r="4"fill="blue" />
     </svg>
 </div>
-<button (click)="GradientDescent()" style="position:absolute;top:82%">Calculate</button>
-<h4>{{cost}}</h4>
-<h4>t0 {{t0}}</h4>
-<h4>t1 {{t1}}</h4>
+<div style="position: absolute; width: 18%; height: 80%; border: none; border-width: 1px;right: 0.5%;">
+  <p>Hypothesis function used for Linear regression is 'Y = t1*X + t0'. Objective of the the algorithm is to find the best values for t0 & t1 </p>
+  <form action="">
+    <label>No. Of iterations:</label>
+    <input type="number" [value]="iterations"/>
+    <label>t0 Initial value:</label>
+    <input type="number" [value]="t0"/>
+    <label>t1 Initial value:</label>
+    <input type="number" [value]="t1"/>
+    <label>Learning Rate:</label>
+    <input type="number" [value]="learningRate"/>
+    <label>Delay (in ms):</label>
+    <input type="number" [value]="delay"/>
+  </form>
+  <button class="button" (click)="GradientDescent()">Calculate</button>
+
+</div>
+<div  style="position:absolute;top:84%">
+  
+  <button class="button" (click)="GradientDescent()">Reset</button>
+</div>
+
+<p>Error: {{cost}}</p>
+<p>t0: {{t0}}</p>
+<p>t1: {{t1}}</p>

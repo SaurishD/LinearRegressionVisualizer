@@ -11,8 +11,10 @@ export class AppComponent {
   dots:any  = [];
   line = [0,0,2000,0];
   editMode: Boolean = true;
-  learningRate = 0.01;
-  iterations = 10;
+  reset: Boolean =false;
+  learningRate = 0.000001;
+  iterations = 1000;
+  delay = 10;
   x:any = [];
   y:any = [];
   t0 = 0;
@@ -29,18 +31,25 @@ export class AppComponent {
     var m: number = this.dots.length;
     this.x = new Array(m);
     this.y = new Array(m);
+    var xAvg = 0;
     for (let i = 0; i < m; i++) {
-      this.x[i] = this.dots[i][0]/100 ;
-      this.y[i] = this.dots[i][1]/100;
+      this.x[i] = this.dots[i][0];
+      this.y[i] = this.dots[i][1];
+      xAvg += this.x[i];
+    }
+    xAvg = xAvg/m;
+    for (let i = 0; i < m; i++) {
+      //this.x[i] = (this.x[i]-xAvg)/xAvg;
     }
     var h:number[] = new Array(m);
 
     for (let itr = 0; itr < this.iterations; itr++) {
+      if(this.reset) break;
       for (let i = 0; i < m; i++) {
         h[i]=this.t0 + this.t1*this.x[i];    
       }
 
-      
+
 
       this.cost = 0;
       for(let i=0;i<m;i++){
@@ -52,7 +61,7 @@ export class AppComponent {
       for(let i=0;i<m;i++){
         temp += (h[i]-this.y[i]);
       }
-      this.t0 = this.t0 - (this.learningRate*temp)/m;
+      this.t0 = this.t0 - (temp)/m;
 
       temp = 0;
       for(let i=0;i<m;i++){
@@ -64,12 +73,19 @@ export class AppComponent {
       this.line[1] = this.t0;
       this.line[3] = this.t0 + 2000*this.t1;
 
-      await new Promise(f => setTimeout(f,1000));
+      await new Promise(f => setTimeout(f,this.delay));
 
       
     }
 
 
     this.editMode = true;
+  }
+
+  async doReset(){
+    this.reset = true;
+
+    await new Promise(f => setTimeout(f,2*this.delay));
+    this.reset = false;
   }
 }
